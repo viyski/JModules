@@ -1,0 +1,26 @@
+apply plugin: 'maven'
+
+configurations {
+    deployerJars
+}
+
+repositories {
+    mavenCentral()
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "http://127.0.0.1:8081/repository/Test/") {
+                authentication(userName: "admin", password: "admin123")
+            }
+            pom.project {
+                version '1.0.0'
+                artifactId 'lib'
+                groupId 'com.android.componentlib'
+                packaging 'aar'
+                description 'library for android'
+            }
+        }
+    }
+}
